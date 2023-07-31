@@ -3,6 +3,9 @@ import {
   APPLY_NUMBER,
   CHANGE_OPERATION,
   CLEAR_DISPLAY,
+  MEMORY_ADD,
+  MEMORY_RECALL,
+  MEMORY_CLEAR,
 } from "./../actions";
 
 export const initialState = {
@@ -14,7 +17,7 @@ export const initialState = {
 const calculateResult = (num1, num2, operation) => {
   switch (operation) {
     case "+":
-      return num1 + num2;
+      return Number(num1) + Number(num2); //concat olmaması için
     case "*":
       return num1 * num2;
     case "-":
@@ -48,6 +51,24 @@ const reducer = (state, action) => {
       return {
         ...state,
         total: 0,
+      };
+
+    case MEMORY_ADD:
+      return {
+        ...state,
+        memory: state.total,
+      };
+
+    case MEMORY_RECALL:
+      return {
+        ...state,
+        total: state.memory,
+      };
+
+    case MEMORY_CLEAR:
+      return {
+        ...state,
+        memory: 0,
       };
 
     default:

@@ -5,6 +5,10 @@ export const CHANGE_OPERATION = "CHANGE_OPERATION";
 
 export const CLEAR_DISPLAY = "CLEAR_DISPLAY";
 
+export const MEMORY_ADD = "MEMORY_ADD";
+export const MEMORY_RECALL = "MEMORY_RECALL";
+export const MEMORY_CLEAR = "MEMORY_CLEAR";
+
 export const addOne = () => {
   return { type: ADD_ONE };
 };

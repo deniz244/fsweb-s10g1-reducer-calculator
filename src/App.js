@@ -15,6 +15,8 @@ import { changeOperator } from "./actions";
 
 import { clearDisplay } from "./actions";
 
+import { MEMORY_ADD, MEMORY_RECALL, MEMORY_CLEAR } from "./actions";
+
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -54,9 +56,30 @@ function App() {
             </div>
 
             <div className="row">
-              <CalcButton value={"M+"} />
-              <CalcButton value={"MR"} />
-              <CalcButton value={"MC"} />
+              <CalcButton
+                value={"M+"}
+                onClick={() =>
+                  dispatch({
+                    type: MEMORY_ADD,
+                  })
+                }
+              />
+              <CalcButton
+                value={"MR"}
+                onClick={() =>
+                  dispatch({
+                    type: MEMORY_RECALL,
+                  })
+                }
+              />
+              <CalcButton
+                value={"MC"}
+                onClick={() =>
+                  dispatch({
+                    type: MEMORY_CLEAR,
+                  })
+                }
+              />
             </div>
 
             <div className="row">
