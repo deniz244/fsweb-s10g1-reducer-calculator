@@ -9,6 +9,10 @@ export const MEMORY_ADD = "MEMORY_ADD";
 export const MEMORY_RECALL = "MEMORY_RECALL";
 export const MEMORY_CLEAR = "MEMORY_CLEAR";
 
+export const EKRANA_YAZ = "EKRANA_YAZ";
+
+export const MEMORY_SUM = "MEMORY_SUM";
+
 export const addOne = () => {
   return { type: ADD_ONE };
 };
@@ -23,4 +27,8 @@ export const changeOperator = (operator) => {
 
 export const clearDisplay = () => {
   return { type: CLEAR_DISPLAY };
+};
+
+export const concatNumber = (number) => {
+  return { type: EKRANA_YAZ, payload: number.toString() };
 };

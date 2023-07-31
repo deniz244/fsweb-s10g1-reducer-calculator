@@ -6,11 +6,13 @@ import {
   MEMORY_ADD,
   MEMORY_RECALL,
   MEMORY_CLEAR,
+  EKRANA_YAZ,
+  MEMORY_SUM,
 } from "./../actions";
 
 export const initialState = {
   total: 0,
-  operation: "+",
+  operation: "",
   memory: 0,
 };
 
@@ -69,6 +71,18 @@ const reducer = (state, action) => {
       return {
         ...state,
         memory: 0,
+      };
+
+    case EKRANA_YAZ:
+      return {
+        ...state,
+        total: (state.total == 0 ? "" : state.total) + action.payload,
+      };
+
+    case MEMORY_SUM:
+      return {
+        ...state,
+        total: Number(state.total) + Number(state.memory),
       };
 
     default:

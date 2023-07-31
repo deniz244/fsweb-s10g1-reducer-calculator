@@ -9,13 +9,19 @@ import { initialState } from "./reducers";
 
 //import { addOne } from "./actions";
 
-import { applyNumber } from "./actions";
+import { CLEAR_DISPLAY, applyNumber } from "./actions";
 
 import { changeOperator } from "./actions";
 
-import { clearDisplay } from "./actions";
+import { clearDisplay, concatNumber } from "./actions";
 
-import { MEMORY_ADD, MEMORY_RECALL, MEMORY_CLEAR } from "./actions";
+import {
+  MEMORY_ADD,
+  MEMORY_RECALL,
+  MEMORY_CLEAR,
+  EKRANA_YAZ,
+  MEMORY_SUM,
+} from "./actions";
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -25,7 +31,9 @@ function App() {
   };*/
 
   const handleApplyNumber = (number) => {
-    dispatch(applyNumber(number)); //
+    //dispatch(applyNumber(number));
+    //dispatch({ type: EKRANA_YAZ, payload: number });
+    dispatch(concatNumber(number));
   };
 
   const handleChangeOperator = (operation) => {
@@ -35,6 +43,20 @@ function App() {
   const handleClearDisplay = () => {
     dispatch(clearDisplay());
   };
+
+  const handleOperatorMemory = (operation) => {
+    dispatch(changeOperator(operation));
+    dispatch({ type: MEMORY_ADD });
+    dispatch({ type: CLEAR_DISPLAY });
+  };
+
+  /*
+    + sayıya basıldıkça basılan sayı ekrandaki sayını sağına eklenecek
+
+    + işleme basıldığında ekrandaki sayı memory'ye atılacak ekran sıfırlanacak ve işlem değişecek
+
+   ekrandaki ve memory'deki = basıldığında sonuç gözükecek ---->>> tuşlara  = eklenecek
+   */
 
   return (
     <div className="App">
@@ -103,20 +125,28 @@ function App() {
             <div className="row">
               <CalcButton
                 value={"+"}
-                onClick={() => handleChangeOperator("+")}
+                onClick={() => handleOperatorMemory("+")}
               />
               <CalcButton
                 value={"*"}
-                onClick={() => handleChangeOperator("*")}
+                onClick={() => handleOperatorMemory("*")}
               />
               <CalcButton
                 value={"-"}
-                onClick={() => handleChangeOperator("-")}
+                onClick={() => handleOperatorMemory("-")}
               />
             </div>
 
             <div className="row ce_button">
               <CalcButton value={"CE"} onClick={handleClearDisplay} />
+              <CalcButton
+                value={"="}
+                onClick={() =>
+                  dispatch({
+                    type: MEMORY_SUM,
+                  })
+                }
+              />
             </div>
           </form>
         </div>
